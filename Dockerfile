@@ -1,4 +1,4 @@
-FROM thomasredstone/base
+FROM thomasredstone/base:1.0.1
 # Install php-fpm
 RUN apt-get update -qq && apt-get -y upgrade
 RUN apt-get install -y -qq software-properties-common && add-apt-repository ppa:ondrej/php && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
