@@ -5,6 +5,14 @@ RUN apt-get install -y -qq software-properties-common && add-apt-repository ppa:
 
 RUN apt-get update && apt-get -y -qq install curl libcurl3 libcurl3-dev php7.0-fpm php7.0-mysql php7.0-curl php7.0-json php7.0-mbstring php7.0-zip php7.0-xml wget
 RUN usermod -u 1000 www-data
+
+# Setting up Tideways profiler
+RUN echo 'deb http://s3-eu-west-1.amazonaws.com/qafoo-profiler/packages debian main' > /etc/apt/sources.list.d/tideways.list
+RUN wget -qO - https://s3-eu-west-1.amazonaws.com/qafoo-profiler/packages/EEB5E8F4.gpg | apt-key add -
+RUN apt-get update
+RUN apt-get install -y -qq tideways-daemon
+RUN wget https://s3-eu-west-1.amazonaws.com/qafoo-profiler/downloads/testing/tideways-php_4.0.1_amd64.deb && dpkg -i tideways-php_4.0.1_amd64.deb
+
 # Adding the configuration files
 RUN mkdir /run/php/ && chown -R www-data:www-data /run/php/
 ADD conf/www.conf /etc/php/7.0/fpm/pool.d/www.conf
