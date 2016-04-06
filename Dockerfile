@@ -12,6 +12,8 @@ RUN wget -qO - https://s3-eu-west-1.amazonaws.com/qafoo-profiler/packages/EEB5E8
 RUN apt-get update
 RUN apt-get install -y -qq tideways-daemon
 RUN wget https://s3-eu-west-1.amazonaws.com/qafoo-profiler/downloads/testing/tideways-php_4.0.1_amd64.deb && dpkg -i tideways-php_4.0.1_amd64.deb
+RUN echo "extension=tideways.so" > /etc/php/7.0/fpm/conf.d/tideways.ini
+RUN echo "extension=tideways.so" > /etc/php/7.0/fpm/conf.d/tideways.ini
 
 # Adding the configuration files
 RUN mkdir /run/php/ && chown -R www-data:www-data /run/php/
