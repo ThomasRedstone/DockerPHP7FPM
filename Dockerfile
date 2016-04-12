@@ -15,6 +15,10 @@ RUN wget https://s3-eu-west-1.amazonaws.com/qafoo-profiler/downloads/testing/tid
 RUN echo "extension=tideways.so" > /etc/php/7.0/fpm/conf.d/tideways.ini
 RUN echo "extension=tideways.so" > /etc/php/7.0/fpm/conf.d/tideways.ini
 
+# The following needs removing and the FROM updating to version 1.0.2 at some point.
+RUN apt-get install -y -qq git
+RUN cd opt/ && git clone https://github.com/letsencrypt/letsencrypt
+
 # Adding the configuration files
 RUN mkdir /run/php/ && chown -R www-data:www-data /run/php/
 ADD conf/www.conf /etc/php/7.0/fpm/pool.d/www.conf
