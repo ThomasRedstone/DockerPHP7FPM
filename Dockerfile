@@ -3,7 +3,7 @@ FROM thomasredstone/base:1.0.2
 RUN apt-get update -qq && apt-get -y upgrade
 RUN apt-get install -y -qq software-properties-common && add-apt-repository ppa:ondrej/php && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
 
-RUN apt-get update && apt-get -y -qq install curl libcurl3 libcurl3-dev php7.0-fpm php7.0-mysql php7.0-curl php7.0-json php7.0-mbstring php7.0-zip php7.0-xml wget
+RUN apt-get update && apt-get -y -qq install curl libcurl3 libcurl3-dev php7.0-fpm php7.0-mysql php7.0-curl php7.0-json php7.0-mbstring php7.0-zip php7.0-xml php7.0-sqlite wget
 RUN usermod -u 1000 www-data
 
 # Setting up Tideways profiler
