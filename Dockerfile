@@ -14,8 +14,8 @@ RUN php -r "unlink('composer-setup.php');"
 
 # Adding the configuration files
 RUN mkdir /run/php/ && chown -R www-data:www-data /run/php/
-ADD conf/www.conf /etc/php/7.0/fpm/pool.d/www.conf
-ADD conf/php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
+ADD conf/www.conf /etc/php/7.1/fpm/pool.d/www.conf
+ADD conf/php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
 # Add the run script to run the service
 ADD run.sh /run.sh
 
