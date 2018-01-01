@@ -2,9 +2,9 @@
 
 if [ $# -eq 0 ]
   then
-    service tideways-daemon start
     #starting php-fpm in foreground
-    /usr/sbin/php-fpm7.0 -F
+    ls -ltrah /usr/sbin/php-fpm*
+    /usr/sbin/php-fpm7.1 -F
 else
     php "$@"
 fi
