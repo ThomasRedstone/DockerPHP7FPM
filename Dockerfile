@@ -30,6 +30,11 @@ mv composer.phar /usr/local/bin/composer; \
 chmod +x /usr/local/bin/composer; \
 exit $RESULT;
 
+RUN apt-get install -y -qq php-pear phpunit php7.2-dev
+RUN apt-get install -y -qq libz-dev
+RUN pecl install grpc
+RUN echo extension=grpc.so >> /etc/php/7.2/cli/conf.d/20-grpc.ini
+
 # Adding the configuration files
 RUN mkdir /run/php/ && chown -R www-data:www-data /run/php/
 ADD conf/www.conf /etc/php/7.2/fpm/pool.d/www.conf
