@@ -33,7 +33,11 @@ exit $RESULT;
 RUN apt-get install -y -qq php-pear phpunit php7.2-dev
 RUN apt-get install -y -qq libz-dev
 RUN pecl install grpc
+RUN pecl install protobuf
 RUN echo extension=grpc.so >> /etc/php/7.2/cli/conf.d/20-grpc.ini
+RUN echo extension=protobuf.so >> /etc/php/7.2/cli/conf.d/20-protobuf.ini
+RUN echo extension=grpc.so >> /etc/php/7.2/fpm/conf.d/20-grpc.ini
+RUN echo extension=protobuf.so >> /etc/php/7.2/fpm/conf.d/20-protobuf.ini
 
 # Adding the configuration files
 RUN mkdir /run/php/ && chown -R www-data:www-data /run/php/
