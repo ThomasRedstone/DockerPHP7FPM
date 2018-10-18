@@ -46,9 +46,6 @@ ADD conf/php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
 # Add the run script to run the service
 ADD run.sh /run.sh
 
-#add the volume for the application
-VOLUME /var/www/app
-
 # Expose the port 9000
 EXPOSE 9000
 # Run the run.sh script
