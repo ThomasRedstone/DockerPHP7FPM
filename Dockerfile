@@ -9,7 +9,9 @@ RUN apt-get install -y -qq libcurl3
 RUN apt-get install -y -qq libcurl3-dev
 RUN apt-get install -y -qq wget
 RUN apt-get install -y -qq php7.2-fpm php7.2-mysql php7.2-curl php7.2-json php7.2-mbstring
-RUN apt-get install -y -qq php7.2-zip php7.2-xml php7.2-sqlite php7.2-imap
+RUN apt-get install -y -qq php7.2-zip php7.2-xml php7.2-sqlite php7.2-imap php7.2-simplexml \
+    php7.2-bcmath php7.2-gd php7.2-intl php7.2-pdo php7.2-common php-pear phpunit php7.2-dev \
+    php7.2-soap libz-dev
 RUN usermod -u 1000 www-data
 
 #!/bin/sh
@@ -30,8 +32,6 @@ mv composer.phar /usr/local/bin/composer; \
 chmod +x /usr/local/bin/composer; \
 exit $RESULT;
 
-RUN apt-get install -y -qq php-pear phpunit php7.2-dev
-RUN apt-get install -y -qq libz-dev
 RUN pecl install grpc
 RUN pecl install protobuf
 RUN echo extension=grpc.so >> /etc/php/7.2/cli/conf.d/20-grpc.ini
