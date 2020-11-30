@@ -1,17 +1,16 @@
-FROM thomasredstone/base:3.0.0
+FROM thomasredstone/base:4.0.1
 # Install php-fpm
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -qq && apt-get -y upgrade
 
 RUN apt-get install -y -qq software-properties-common language-pack-en-base curl
-RUN apt-get install -y -qq libcurl3
-RUN apt-get install -y -qq libcurl3-dev
+RUN apt-get install -y -qq libcurl4
 RUN apt-get install -y -qq wget
-RUN apt-get install -y -qq php7.2-fpm php7.2-mysql php7.2-curl php7.2-json php7.2-mbstring
-RUN apt-get install -y -qq php7.2-zip php7.2-xml php7.2-sqlite php7.2-imap php7.2-simplexml \
-    php7.2-bcmath php7.2-gd php7.2-intl php7.2-pdo php7.2-common php-pear phpunit php7.2-dev \
-    php7.2-soap libz-dev
+RUN apt-get install -y -qq php7.4-fpm php7.4-mysql php7.4-curl php7.4-json php7.4-mbstring
+RUN apt-get install -y -qq php7.4-zip php7.4-xml php7.4-sqlite php7.4-imap php7.4-simplexml \
+    php7.4-bcmath php7.4-gd php7.4-intl php7.4-pdo php7.4-common php-pear phpunit php7.4-dev \
+    php7.4-soap libz-dev
 RUN usermod -u 1000 www-data
 
 #!/bin/sh
@@ -34,15 +33,15 @@ exit $RESULT;
 
 RUN pecl install grpc
 RUN pecl install protobuf
-RUN echo extension=grpc.so >> /etc/php/7.2/cli/conf.d/20-grpc.ini
-RUN echo extension=protobuf.so >> /etc/php/7.2/cli/conf.d/20-protobuf.ini
-RUN echo extension=grpc.so >> /etc/php/7.2/fpm/conf.d/20-grpc.ini
-RUN echo extension=protobuf.so >> /etc/php/7.2/fpm/conf.d/20-protobuf.ini
+RUN echo extension=grpc.so >> /etc/php/7.4/cli/conf.d/20-grpc.ini
+RUN echo extension=protobuf.so >> /etc/php/7.4/cli/conf.d/20-protobuf.ini
+RUN echo extension=grpc.so >> /etc/php/7.4/fpm/conf.d/20-grpc.ini
+RUN echo extension=protobuf.so >> /etc/php/7.4/fpm/conf.d/20-protobuf.ini
 
 # Adding the configuration files
 RUN mkdir /run/php/ && chown -R www-data:www-data /run/php/
-ADD conf/www.conf /etc/php/7.2/fpm/pool.d/www.conf
-ADD conf/php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
+ADD conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+ADD conf/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
 # Add the run script to run the service
 ADD run.sh /run.sh
 
